@@ -32,15 +32,13 @@ function registerUser($email, $username, $password, $conn) {
   $sql = "INSERT INTO users (username, email, `password`) VALUES ('$username', '$email', '$password')";
   if (mysqli_query($conn, $sql)) {
     // success
-    header('Location: login.php');
-    die();
   } else {
     // error
     echo 'Error: ' . mysqli_error($conn);
   }
 }
 
-if (isset($_POST["submit"])) {
+if (isset($_POST["submitUp"])) {
   $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
   $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
   $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -129,7 +127,7 @@ if (isset($_POST["submit"])) {
 
     <button
       type="submit"
-      name="submit"
+      name="submitUp"
       class="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     >
       Sign Up

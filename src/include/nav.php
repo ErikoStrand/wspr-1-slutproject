@@ -1,10 +1,8 @@
 <?php session_start(); ?>
-
 <?php 
 include("config/database.php");
 include("include/login.php");
 ?>
-
 <nav
       class="flex h-12 flex-row items-center justify-between border-b-[1px] border-b-zinc-800 drop-shadow-xl"
     >

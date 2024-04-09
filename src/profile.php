@@ -24,6 +24,11 @@ function doesUserExist($username, $conn) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/src/output.css" rel="stylesheet" />
+  <script
+      defer
+      src="https://kit.fontawesome.com/0a145d8537.js"
+      crossorigin="anonymous"
+    ></script>
   <title>Document</title>
 </head>
 
@@ -31,7 +36,19 @@ function doesUserExist($username, $conn) {
 <?php include("include/nav.php") ?>
 
 <?php if (doesUserExist($username, $conn)): ?>
-  <h1 class=""><?php echo $username?></h1>
+
+  <div class="max-w-screen-xl text-stone-200 px-4">
+    <div class="flex flex-row justify-between items-center h-24">
+      <div id="profile" class="flex flex-row items-center gap-4">
+        <i class="fa-solid fa-user fa-2xl"></i>
+        <h1 class="text-2xl font-archivo font-semibold"><?php echo $username?></h1>
+      </div>
+      <div id="profileStats" class="flex flex-row gap-2">
+        <h4 class="flex flex-col text-center"><span class="text-2xl font-mono font-bold">0</span><span class="text-xs font-archivo">FOLLOWING</span></h4>
+        <h4 class="flex flex-col text-center"><span class="text-2xl font-mono font-bold">0</span><span class="text-xs font-archivo">FOLLOWERS</span></h4>
+      </div>
+    </div>
+  </div>
 
 
 

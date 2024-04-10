@@ -1,6 +1,15 @@
 <?php 
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 include "config/database.php";
-$username = $_GET["user"];
+if (isset($_SESSION["username"])) {
+  $loggedUser = $_SESSION["username"];
+}
+$loggedUser = "";
+$profileUsername = $_GET["user"];
+$profileUserID = $conn->query("SELECT userID FROM users WHERE username = $profileUsername");
+
 function doesUserExist($username, $conn) {
   $sql = 'SELECT username FROM users WHERE username = ?';
   $stmt = mysqli_prepare($conn, $sql);
@@ -14,6 +23,11 @@ function doesUserExist($username, $conn) {
   }
 }
 
+function followPerson($profileUserID) {
+  
+
+
+}
 ?>
 
 
@@ -35,25 +49,23 @@ function doesUserExist($username, $conn) {
 <body class="m-0 h-dvh w-full bg-zinc-900 p-0">
 <?php include("include/nav.php") ?>
 
-<?php if (doesUserExist($username, $conn)): ?>
+<?php if (doesUserExist($profileUsername, $conn)): ?>
 
-  <div class="max-w-screen-xl text-stone-200 px-4">
+  <div class="max-w-screen-xl text-stone-200 px-4 mx-auto">
     <div class="flex flex-row justify-between items-center h-24">
       <div id="profile" class="flex flex-row items-center gap-4">
         <i class="fa-solid fa-user fa-2xl"></i>
-        <h1 class="text-2xl font-archivo font-semibold"><?php echo $username?></h1>
+        <h1 class="text-2xl font-archivo font-semibold"><?php echo $profileUsername?></h1>
+        <?php if($profileUsername != $loggedUser):?>
+        <form action="" method="post"><button id="follow" type="submit" name="follow" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button></form>
+        <?php endif; ?>
       </div>
       <div id="profileStats" class="flex flex-row gap-2">
         <h4 class="flex flex-col text-center"><span class="text-2xl font-mono font-bold">0</span><span class="text-xs font-archivo">FOLLOWING</span></h4>
         <h4 class="flex flex-col text-center"><span class="text-2xl font-mono font-bold">0</span><span class="text-xs font-archivo">FOLLOWERS</span></h4>
       </div>
     </div>
-  </div>
-
-
-
-
-
+  </div
 
 <?php else: ?>
   <div class="text-stone-200 text-2xl text-center">

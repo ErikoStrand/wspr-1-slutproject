@@ -1,10 +1,12 @@
-<?php session_start(); ?>
 <?php 
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 include("config/database.php");
 include("include/login.php");
 ?>
 <nav
-      class="flex h-12 flex-row items-center justify-between border-b-[1px] bg-gray-800 border-b-zinc-800 box-shadow-md shadow-zinc-600"
+      class="flex h-12 flex-row items-center justify-between border-b-[1px] bg-red-500 border-b-zinc-800 box-shadow-md shadow-zinc-600"
     >
       <div>
         <a

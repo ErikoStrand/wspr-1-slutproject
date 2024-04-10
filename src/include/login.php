@@ -8,6 +8,7 @@ if (isset($_POST["submitIn"])) {
   if(tryLoggingIn($username, $password, $conn)) {
     //save user in session, so that you are "logged in".
     $_SESSION["username"] = $username;
+    $_SESSION["userID"] = $conn->query("SELECT userID FROM users WHERE username = $username");
     header("Location: ./" . urlencode($username));
     die();
   } else {

@@ -27,7 +27,7 @@ include("include/login.php");
         <li
           class="rounded-md px-2 duration-200 ease-in-out hover:bg-gray-600/50"
         >
-          <button id="signInButton" class="block leading-10" title="Profile">Sign In</button>
+          <button onclick="openModal();" class="block leading-10" title="Profile">Sign In</button>
         </li>
         <?php else: ?>
           <li

@@ -11,7 +11,7 @@ if (isset($_SESSION["username"])) {
 }
 $loggedUser = "";
 $profileUsername = filter_input(INPUT_GET, "user", FILTER_SANITIZE_SPECIAL_CHARS);
-$profileUserID = $conn->query("SELECT userID FROM users WHERE username = $profileUsername");
+$profileUserID = mysqli_fetch_row($conn->query("SELECT userID FROM users WHERE username = '$profileUsername'"))[0];
 
 function doesUserExist($username, $conn) {
   $sql = 'SELECT username FROM users WHERE username = ?';
@@ -25,11 +25,12 @@ function doesUserExist($username, $conn) {
     return false;
   }
 }
-
-function followPerson($profileUserID) {
-  
-
-
+if (isset($_POST["follow"])) {
+  followPerson($profileUserID, $conn);
+}
+function followPerson($profileUserID, $conn) {
+  $userID = $_SESSION["userID"];
+  $conn->query("INSERT INTO follow (userID, followID) VALUES ('$userID', '$profileUserID')");
 }
 ?>
 

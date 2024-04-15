@@ -3,16 +3,23 @@ if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
 include "config/database.php";
-if (isset($_SESSION["username"])) {
-  $loggedUser = $_SESSION["username"];
-  $logged = true;
-} else {
-  $logged = false;
-}
-$loggedUser = "";
-$profileUsername = filter_input(INPUT_GET, "user", FILTER_SANITIZE_SPECIAL_CHARS);
-$profileUserID = mysqli_fetch_row($conn->query("SELECT userID FROM users WHERE username = '$profileUsername'"))[0];
 
+
+$loggedUser = ""; 
+$profileUsername = filter_input(INPUT_GET, "user", FILTER_SANITIZE_SPECIAL_CHARS);
+
+if (doesUserExist($profileUsername, $conn)) {
+  if (isset($_SESSION["username"])) {
+    $loggedUser = $_SESSION["username"];
+    $logged = true;
+  } else {
+    $logged = false;
+  }
+  $profileUserID = mysqli_fetch_row($conn->query("SELECT userID FROM users WHERE username = '$profileUsername'"))[0];
+  $profileNoofFollowers = $conn->query("SELECT followID FROM follow WHERE followID = '$profileUserID'")->num_rows;
+  $profileNoofFollowing = $conn->query("SELECT userID FROM follow WHERE userID = '$profileUserID'")->num_rows;
+  $isLoggedFollowing = $conn->query("SELECT userID FROM follow WHERE followID = '$profileUserID'")->num_rows;
+}
 function doesUserExist($username, $conn) {
   $sql = 'SELECT username FROM users WHERE username = ?';
   $stmt = mysqli_prepare($conn, $sql);
@@ -28,13 +35,20 @@ function doesUserExist($username, $conn) {
 if (isset($_POST["follow"])) {
   followPerson($profileUserID, $conn);
 }
+if (isset($_POST["unfollow"])) {
+  unFollowPerson($profileUserID, $conn);
+}
+function unFollowPerson($profileUserID, $conn) {
+  $userID = $_SESSION["userID"];
+  $conn->query("DELETE FROM follow WHERE userID = '$userID' AND followID = '$profileUserID'");
+  header("Refresh: 0");
+}
 function followPerson($profileUserID, $conn) {
   $userID = $_SESSION["userID"];
   $conn->query("INSERT INTO follow (userID, followID) VALUES ('$userID', '$profileUserID')");
+  header("Refresh: 0");
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,20 +77,22 @@ function followPerson($profileUserID, $conn) {
         <h1 class="text-2xl font-archivo font-semibold"><?php echo $profileUsername?></h1>
         <?php if(!$logged):?>
         <button onclick="openModal();" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button>
-        <?php elseif($profileUsername != $loggedUser): ?>
+        <?php elseif($profileUsername != $loggedUser && !$isLoggedFollowing): ?>
         <form action="" method="post"><button id="follow" type="submit" name="follow" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button></form>
+        <?php elseif($profileUsername != $loggedUser && $isLoggedFollowing): ?>
+        <form action="" method="post"><button id="unfollow" type="submit" name="unfollow" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Unfollow</button></form>
         <?php endif; ?>
+        
       </div>
       <div id="profileStats" class="flex flex-row gap-2">
-        <h4 class="flex flex-col text-center"><span class="text-2xl font-mono font-bold">0</span><span class="text-xs font-archivo">FOLLOWING</span></h4>
-        <h4 class="flex flex-col text-center"><span class="text-2xl font-mono font-bold">0</span><span class="text-xs font-archivo">FOLLOWERS</span></h4>
+        <h4 class="flex flex-col text-center"><span class="text-2xl font-mono font-bold"><?php echo $profileNoofFollowing?></span><span class="text-xs font-archivo">FOLLOWING</span></h4>
+        <h4 class="flex flex-col text-center"><span class="text-2xl font-mono font-bold"><?php echo $profileNoofFollowers?></span><span class="text-xs font-archivo">FOLLOWERS</span></h4>
       </div>
     </div>
   </div
 
 <?php else: ?>
   <div class="text-stone-200 text-2xl text-center">
-    <h1><?php echo $profileUsername;?></h1>
     <h1>This account does unfortunately not exist.</h1>
     <a href="index.php" class="text-blue-500 underline" >Go back to Bloob</a>
   </div>

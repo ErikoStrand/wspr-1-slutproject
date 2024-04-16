@@ -25,7 +25,7 @@
       <h1>Upload your ratings.</h1>
       <h1>Discover your vibe.</h1>
       <h1>Find your homies vibe.</h1>
-      <button id="signUpButton" class="text center mt-4 bg-blue-500 px-4 py-2 rounded-md font-archivo text-lg font-bold leading-6 tracking-wide text-stone-200">
+      <button onclick="openModal('signUp')" class="text center mt-4 bg-blue-500 px-4 py-2 rounded-md font-archivo text-lg font-bold leading-6 tracking-wide text-stone-200">
         Get Started, it's Bloobmazing.
       </button>
     </div>

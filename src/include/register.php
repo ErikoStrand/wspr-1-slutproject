@@ -72,7 +72,7 @@ if (isset($_POST["submitUp"])) {
   <div class="flex flex-row justify-between">
     <h1 class="text-4xl font-normal font-archivo tracking-wide text-gray-400">Join Bloob</h1>
     <button
-    id="signUpClose"
+    onclick="closeModal('signUp')"
     class="p-2 text-xl font-semibold text-stone-100"
   >
     X
@@ -83,13 +83,13 @@ if (isset($_POST["submitUp"])) {
       <input
         type="email"
         name="email"
-        id="floating_email"
+        id="floating_email_r"
         class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
         placeholder=" "
         required
       />
       <label
-        for="floating_email"
+        for="floating_email_r"
         class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:start-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:font-medium peer-focus:text-blue-600 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-gray-400 peer-focus:dark:text-blue-500"
         >Email address</label
       >
@@ -98,13 +98,13 @@ if (isset($_POST["submitUp"])) {
       <input
         type="text"
         name="username"
-        id="floating_email"
+        id="floating_username_r"
         class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
         placeholder=" "
         required
       />
       <label
-        for="floating_email"
+        for="floating_username_r"
         class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:start-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:font-medium peer-focus:text-blue-600 rtl:peer-focus:left-auto rtl:peer-focus:translate-x-1/4 dark:text-gray-400 peer-focus:dark:text-blue-500"
         >Username</label
       >
@@ -113,13 +113,13 @@ if (isset($_POST["submitUp"])) {
       <input
         type="password"
         name="password"
-        id="floating_password"
+        id="floating_password_r"
         class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
         placeholder=" "
         required
       />
       <label
-        for="floating_password"
+        for="floating_password_r"
         class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:start-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:font-medium peer-focus:text-blue-600 rtl:peer-focus:translate-x-1/4 dark:text-gray-400 peer-focus:dark:text-blue-500"
         >Password</label
       >

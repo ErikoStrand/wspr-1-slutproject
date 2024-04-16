@@ -51,8 +51,7 @@ echo $error;
 >
   <div class="flex flex-row justify-between pb-2">
     <h1 class="text-4xl font-normal font-archivo tracking-wide text-gray-400">Sign In</h1>
-    <button
-    id="signInClose"
+    <button onclick="closeModal('signIn')"
     class="p-2 text-xl font-semibold text-stone-100"
   >
     X

@@ -67,6 +67,8 @@ function followPerson($profileUserID, $conn) {
 
 <body class="m-0 h-dvh w-full bg-zinc-900 p-0">
 <?php include("include/nav.php") ?>
+<?php include("include/dialog.php") ?>
+
 
 <?php if (doesUserExist($profileUsername, $conn)): ?>
 
@@ -80,13 +82,13 @@ function followPerson($profileUserID, $conn) {
         <?php elseif($profileUsername != $loggedUser && !$isLoggedFollowing): ?>
         <form action="" method="post"><button id="follow" type="submit" name="follow" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button></form>
         <?php elseif($profileUsername != $loggedUser && $isLoggedFollowing): ?>
-        <form action="" method="post"><button id="unfollow" type="submit" name="unfollow" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Unfollow</button></form>
+        <form action="" method="post"><button id="unfollow" type="submit" name="unfollow" class="font-archivo font-medium bg-red-500 rounded-xl border-2 border-red-400 px-3 py-1">Unfollow</button></form>
         <?php endif; ?>
         
       </div>
       <div id="profileStats" class="flex flex-row gap-2">
-        <h4 class="flex flex-col text-center"><span class="text-2xl font-mono font-bold"><?php echo $profileNoofFollowing?></span><span class="text-xs font-archivo">FOLLOWING</span></h4>
-        <h4 class="flex flex-col text-center"><span class="text-2xl font-mono font-bold"><?php echo $profileNoofFollowers?></span><span class="text-xs font-archivo">FOLLOWERS</span></h4>
+        <form action="" method="get"><button onclick="openModal('emptyDialog')" class="flex flex-col items-center" name="following"><span class="text-2xl font-mono font-bold"><?php echo $profileNoofFollowing?></span><span class="text-xs font-archivo">FOLLOWING</span></button></form>
+        <form action="" method="get"><button onclick="openModal('emptyDialog')" class="flex flex-col items-center" name="followers"><span class="text-2xl font-mono font-bold"><?php echo $profileNoofFollowers?></span><span class="text-xs font-archivo">FOLLOWERS</span></button></form>
       </div>
     </div>
   </div

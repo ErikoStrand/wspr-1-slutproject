@@ -560,8 +560,16 @@ video {
   position: relative;
 }
 
+.sticky{
+  position: sticky;
+}
+
 .top-3{
   top: 0.75rem;
+}
+
+.top-0{
+  top: 0px;
 }
 
 .-z-10{
@@ -605,16 +613,16 @@ video {
   height: 6rem;
 }
 
+.h-96{
+  height: 24rem;
+}
+
 .h-dvh{
   height: 100dvh;
 }
 
 .h-full{
   height: 100%;
-}
-
-.h-96{
-  height: 24rem;
 }
 
 .w-full{
@@ -1011,12 +1019,6 @@ video {
 .shadow-zinc-600{
   --tw-shadow-color: #52525b;
   --tw-shadow: var(--tw-shadow-colored);
-}
-
-.backdrop-blur-none{
-  --tw-backdrop-blur: blur(0);
-  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
 .duration-100{

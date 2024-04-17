@@ -564,12 +564,12 @@ video {
   position: sticky;
 }
 
-.top-3{
-  top: 0.75rem;
-}
-
 .top-0{
   top: 0px;
+}
+
+.top-3{
+  top: 0.75rem;
 }
 
 .-z-10{
@@ -825,6 +825,10 @@ video {
   padding: 1rem;
 }
 
+.p-3{
+  padding: 0.75rem;
+}
+
 .px-0{
   padding-left: 0px;
   padding-right: 0px;
@@ -868,6 +872,11 @@ video {
 .py-2\.5{
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
+}
+
+.py-3{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .pb-2{
@@ -1037,6 +1046,10 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.ease-in{
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
 .backdrop\:backdrop-blur-md::backdrop{
   --tw-backdrop-blur: blur(12px);
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
@@ -1050,6 +1063,20 @@ video {
 
 .hover\:bg-gray-600\/50:hover{
   background-color: rgb(75 85 99 / 0.5);
+}
+
+.hover\:bg-stone-400:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(168 162 158 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-400:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-400\/50:hover{
+  background-color: rgb(156 163 175 / 0.5);
 }
 
 .hover\:text-stone-400:hover{

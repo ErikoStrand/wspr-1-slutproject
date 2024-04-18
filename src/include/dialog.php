@@ -42,6 +42,7 @@ function showFollowers($conn, $profileUserID) {
   $followers = $result->fetch_all(MYSQLI_ASSOC);
   return $followers;
 }
+
 function showFollowing($conn, $profileUserID) {
   $result = $conn->query(
     "SELECT users.userID, users.username

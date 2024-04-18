@@ -10,7 +10,13 @@ function closeModal(dialog) {
   removeQueryParamAndReload("following");
   dialog.close();
 }
-
+document.addEventListener("keydown", function (event) {
+  if (event.key == "Escape") {
+    removeQueryParamAndReload("followers");
+    removeQueryParamAndReload("following");
+    console.log("pressed espece.");
+  }
+});
 function doesURLContain(string) {
   return window.location.href.includes(string);
 }

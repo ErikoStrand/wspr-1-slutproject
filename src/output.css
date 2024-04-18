@@ -821,12 +821,12 @@ video {
   padding: 0.5rem;
 }
 
-.p-4{
-  padding: 1rem;
-}
-
 .p-3{
   padding: 0.75rem;
+}
+
+.p-4{
+  padding: 1rem;
 }
 
 .px-0{
@@ -872,11 +872,6 @@ video {
 .py-2\.5{
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
-}
-
-.py-3{
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
 }
 
 .pb-2{
@@ -942,6 +937,11 @@ video {
   line-height: 1rem;
 }
 
+.text-3xl{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
 .font-bold{
   font-weight: 700;
 }
@@ -958,6 +958,10 @@ video {
   font-weight: 600;
 }
 
+.font-light{
+  font-weight: 300;
+}
+
 .leading-10{
   line-height: 2.5rem;
 }
@@ -968,6 +972,10 @@ video {
 
 .tracking-wide{
   letter-spacing: 0.025em;
+}
+
+.tracking-tight{
+  letter-spacing: -0.025em;
 }
 
 .text-blue-500{
@@ -1042,12 +1050,12 @@ video {
   transition-duration: 300ms;
 }
 
-.ease-in-out{
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 .ease-in{
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.ease-in-out{
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .backdrop\:backdrop-blur-md::backdrop{
@@ -1061,22 +1069,12 @@ video {
   background-color: rgb(30 64 175 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-gray-600\/50:hover{
-  background-color: rgb(75 85 99 / 0.5);
-}
-
-.hover\:bg-stone-400:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(168 162 158 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-gray-400:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-gray-400\/50:hover{
   background-color: rgb(156 163 175 / 0.5);
+}
+
+.hover\:bg-gray-600\/50:hover{
+  background-color: rgb(75 85 99 / 0.5);
 }
 
 .hover\:text-stone-400:hover{

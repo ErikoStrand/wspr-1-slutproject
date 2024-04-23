@@ -1,4 +1,4 @@
 RewriteEngine On
 
-RewriteRule ^([a-zA-Z0-9]+)$ profile.php?user=$1 [QSA]
+RewriteRule ^([a-zA-Z0-9]+)$ profile.php?user=$1 [QSA,NC,L]
 

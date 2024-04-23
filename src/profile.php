@@ -64,12 +64,12 @@ function followPerson($profileUserID, $conn) {
     ></script>
   <title>Document</title>
   <script defer src="dialog.js"></script>
+
 </head>
 
 <body class="m-0 h-dvh w-full bg-zinc-900 p-0">
 <?php include("include/nav.php") ?>
 <?php include("include/dialog.php") ?>
-
 
 <?php if (doesUserExist($profileUsername, $conn)): ?>
 

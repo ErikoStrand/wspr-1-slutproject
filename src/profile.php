@@ -92,6 +92,17 @@ function followPerson($profileUserID, $conn) {
         <form action="" method="get"><button onclick="openModal('emptyDialog')" value=true class="flex flex-col items-center" name="followers"><span class="text-2xl font-mono font-bold"><?php echo $profileNoofFollowers?></span><span class="text-xs font-archivo">FOLLOWERS</span></button></form>
       </div>
     </div>
+    <div class="mb-16 flex h-12 flex-col gap-4 text-center md:flex-row">
+        <button
+          class="rounded-xl bg-accent p-2 font-archivo text-2xl font-bold text-zinc-900 outline outline-2 outline-yellow-500 drop-shadow-lg md:w-2/3"
+          onclick="document.getElementById('file').click()"
+        >
+          Upload Your Ratings
+        </button>
+        <input type="file" id="file" style="display: none" />
+      </div>
+    <script src="input.js"></script>
+    </div>
   </div
 
 <?php else: ?>
@@ -100,5 +111,6 @@ function followPerson($profileUserID, $conn) {
     <a href="index.php" class="text-blue-500 underline" >Go back to Bloob</a>
   </div>
 <?php endif; ?>
+
 </body>
 </html>

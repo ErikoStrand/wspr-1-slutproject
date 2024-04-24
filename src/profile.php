@@ -106,7 +106,6 @@ function followPerson($profileUserID, $conn) {
     </div>
     <?php 
     if (isset($_SESSION["movies"])) {
-      var_dump($_SESSION["movies"]);
       echo "works";
     }
     ?>

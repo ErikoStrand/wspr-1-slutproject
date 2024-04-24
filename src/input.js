@@ -1,3 +1,9 @@
+var jQueryScript = document.createElement("script");
+jQueryScript.setAttribute(
+  "src",
+  "https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js",
+);
+document.head.appendChild(jQueryScript);
 const data = [];
 (function () {
   // Constants
@@ -154,23 +160,18 @@ function checkAllDataDone() {
     saveData("movies", movies);
     saveData("shows", shows);
     saveData("generalData", generalData);
-    sendFinishedData("movies");
-    sendFinishedData("shows");
-    sendFinishedData("generalData");
+    sendDataFinished(movies, "movies=", function (response) {
+      console.log(response);
+    });
+    sendDataFinished(shows, "shows=", function (response) {
+      console.log(response);
+    });
+    sendDataFinished(generalData, "generalData=", function (response) {
+      console.log(response);
+    });
   }
 }
-function sendFinishedData(which) {
-  var data = sessionStorage.getItem(which);
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "data.php", true);
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      console.log(xhr.responseText);
-    }
-  };
-  xhr.send(which + "=" + data);
-}
+
 function saveData(name, data) {
   sessionStorage.setItem(name, JSON.stringify(data));
 }
@@ -452,4 +453,19 @@ function sendData(episodes, callback) {
   };
 
   xhr.send("data=" + JSON.stringify(episodes)); // Send the form data to the server
+}
+
+function sendDataFinished(episodes, name, callback) {
+  var xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
+  xhr.open("POST", "data.php", true); // Specify the request type and URL
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // Set the content type header
+
+  // Set up a callback function to handle the response
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+      callback(xhr.responseText); // Call the callback function with the response
+    }
+  };
+
+  xhr.send(name + JSON.stringify(episodes)); // Send the form data to the server
 }

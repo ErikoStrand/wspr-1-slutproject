@@ -2,19 +2,28 @@
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
-if (isset($_POST['movies'])) {
-    $movies = $_POST['movies'];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  // Retrieve the data sent from the client
+  if (isset($_POST["movies"])) {
+    $movies = (array)json_decode($_POST["movies"]);
     $_SESSION["movies"] = $movies;
-    // You can now use the email in your PHP script
-}
-if (isset($_POST['shows'])) {
-  $shows = $_POST['shows'];
-  $_SESSION["shows"] = $shows;
-  // You can now use the email in your PHP script
-}
-if (isset($_POST['generalData'])) {
-  $generalData = $_POST['generalData'];
-  $_SESSION["generalData"] = $generalData;
-  // You can now use the email in your PHP script
+    echo "done movies";
+  }
+  if (isset($_POST["shows"])) {
+    $shows = (array)json_decode($_POST["shows"]);
+    $_SESSION["shows"] = $shows;
+    echo "done shows";
+
+  }
+  if (isset($_POST["generalData"])) {
+    $generalData = (array)json_decode($_POST["generalData"]);
+    $_SESSION["generalData"] = $generalData;
+    echo "done general";
+  }
+
+  // Process the data 
+} else {
+  // If the script is not accessed via an HTTP request, return an error message
+  echo "Error: This script can only be accessed via an HTTP request.";
 }
 ?>

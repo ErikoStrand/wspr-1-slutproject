@@ -51,6 +51,8 @@ function followPerson($profileUserID, $conn) {
 }
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +74,6 @@ function followPerson($profileUserID, $conn) {
 <?php include("include/dialog.php") ?>
 
 <?php if (doesUserExist($profileUsername, $conn)): ?>
-
   <div class="max-w-screen-xl text-stone-200 px-4 mx-auto">
     <div class="flex flex-row justify-between items-center h-24">
       <div id="profile" class="flex flex-row items-center gap-4">
@@ -93,16 +94,22 @@ function followPerson($profileUserID, $conn) {
       </div>
     </div>
     <div class="mb-16 flex h-12 flex-col gap-4 text-center md:flex-row">
-        <button
+      <button
           class="rounded-xl bg-accent p-2 font-archivo text-2xl font-bold text-zinc-900 outline outline-2 outline-yellow-500 drop-shadow-lg md:w-2/3"
           onclick="document.getElementById('file').click()"
         >
           Upload Your Ratings
-        </button>
+      </button>
         <input type="file" id="file" style="display: none" />
+        <script src="input.js"></script>
       </div>
-    <script src="input.js"></script>
     </div>
+    <?php 
+    if (isset($_SESSION["movies"])) {
+      var_dump($_SESSION["movies"]);
+      echo "works";
+    }
+    ?>
   </div
 
 <?php else: ?>

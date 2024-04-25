@@ -106,6 +106,7 @@ function followPerson($profileUserID, $conn) {
     </div>
     <?php 
     if (isset($_SESSION["movies"])) {
+      print_r($_SESSION["movies"]);
       echo "works";
     }
     ?>

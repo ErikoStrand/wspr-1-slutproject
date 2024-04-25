@@ -5,12 +5,13 @@ if (session_status() === PHP_SESSION_NONE) {
 include "config/database.php";
 
 
-$loggedUser = ""; 
+$loggedUsername = ""; 
+
 $profileUsername = filter_input(INPUT_GET, "user", FILTER_SANITIZE_SPECIAL_CHARS);
 
 if (doesUserExist($profileUsername, $conn)) {
   if (isset($_SESSION["username"])) {
-    $loggedUser = $_SESSION["username"];
+    $loggedUsername = $_SESSION["username"];
     $logged = true;
   } else {
     $logged = false;
@@ -81,10 +82,21 @@ function followPerson($profileUserID, $conn) {
         <h1 class="text-2xl font-archivo font-semibold"><?php echo $profileUsername?></h1>
         <?php if(!$logged):?>
         <button onclick="openModal();" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button>
-        <?php elseif($profileUsername != $loggedUser && !$isLoggedFollowing): ?>
+        <?php elseif($profileUsername != $loggedUsername && !$isLoggedFollowing): ?>
         <form action="" method="post"><button id="follow" type="submit" name="follow" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button></form>
-        <?php elseif($profileUsername != $loggedUser && $isLoggedFollowing): ?>
+        <?php elseif($profileUsername != $loggedUsername && $isLoggedFollowing): ?>
         <form action="" method="post"><button id="unfollow" type="submit" name="unfollow" class="font-archivo font-medium bg-red-500 rounded-xl border-2 border-red-400 px-3 py-1">Unfollow</button></form>
+        <?php elseif($profileUsername == $loggedUsername):?>
+        <div>
+          <button
+              class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1"
+              onclick="document.getElementById('file').click()"
+            >
+              Upload Your Ratings
+          </button>
+            <input type="file" id="file" style="display: none" />
+            <script src="input.js"></script>
+        </div>
         <?php endif; ?>
         
       </div>
@@ -93,23 +105,8 @@ function followPerson($profileUserID, $conn) {
         <form action="" method="get"><button onclick="openModal('emptyDialog')" value=true class="flex flex-col items-center" name="followers"><span class="text-2xl font-mono font-bold"><?php echo $profileNoofFollowers?></span><span class="text-xs font-archivo">FOLLOWERS</span></button></form>
       </div>
     </div>
-    <div class="mb-16 flex h-12 flex-col gap-4 text-center md:flex-row">
-      <button
-          class="rounded-xl bg-accent p-2 font-archivo text-2xl font-bold text-zinc-900 outline outline-2 outline-yellow-500 drop-shadow-lg md:w-2/3"
-          onclick="document.getElementById('file').click()"
-        >
-          Upload Your Ratings
-      </button>
-        <input type="file" id="file" style="display: none" />
-        <script src="input.js"></script>
-      </div>
+      
     </div>
-    <?php 
-    if (isset($_SESSION["movies"])) {
-      print_r($_SESSION["movies"]);
-      echo "works";
-    }
-    ?>
   </div
 
 <?php else: ?>

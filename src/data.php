@@ -1,10 +1,13 @@
 <?php
+include "config/database.php";
+
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
-function insertData() {
-  
+function insertData($conn, $array, $name) {
+
 }
+
 function cleanData($array) {
   $cleanArray = array();
   foreach($array as $key => $value) {

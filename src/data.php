@@ -2,7 +2,9 @@
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
-
+function insertData() {
+  
+}
 function cleanData($array) {
   $cleanArray = array();
   foreach($array as $key => $value) {
@@ -18,8 +20,8 @@ function cleanData($array) {
         $cleanArray[$key][$nestedKey] = $nestedValue;
       }
     }
-    return $cleanArray;
   }
+  return $cleanArray;
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -38,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   if (isset($_POST["generalData"])) {
     $generalData = cleanData((array)json_decode($_POST["generalData"]));
     $_SESSION["generalData"] = $generalData;
+    print_r($generalData);
     echo "done general";
   }
 

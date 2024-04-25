@@ -81,7 +81,7 @@ function followPerson($profileUserID, $conn) {
         <i class="fa-solid fa-user fa-2xl"></i>
         <h1 class="text-2xl font-archivo font-semibold"><?php echo $profileUsername?></h1>
         <?php if(!$logged):?>
-        <button onclick="openModal();" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button>
+        <button onclick="openModal('signIn');" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button>
         <?php elseif($profileUsername != $loggedUsername && !$isLoggedFollowing): ?>
         <form action="" method="post"><button id="follow" type="submit" name="follow" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button></form>
         <?php elseif($profileUsername != $loggedUsername && $isLoggedFollowing): ?>

@@ -124,7 +124,7 @@ function followPerson($profileUserID, $conn) {
 <?php include("include/nav.php") ?>
 <?php include("include/dialog.php") ?>
 <?php if (doesUserExist($profileUsername, $conn)): ?>
-  <div class="max-w-screen-xl text-stone-200 px-4 mx-auto">
+  <div class="max-w-screen-sm text-stone-200 px-4 mx-auto">
     <div class="flex flex-row justify-between items-center h-24">
       <div id="profile" class="flex flex-row items-center gap-4">
         <i class="fa-solid fa-user fa-2xl"></i>
@@ -149,7 +149,7 @@ function followPerson($profileUserID, $conn) {
     <div class="p">
       <?php if ($profileUsername == $loggedUsername):?>
         <form action="" method="post" class="flex flex-col gap-4">
-          <textarea id="text" name="text" class="resize-none overflow-hidden bg-transparent border-2 border-stone-200  placeholder:text-stone-400 rounded-md p-2 appearance-none text-stone-400" oninput="autoResize(this)" placeholder="Type your thoughts here..."></textarea>
+          <textarea id="text" name="text" class="resize-none overflow-hidden bg-transparent border-[1px] border-zinc-700  placeholder:text-stone-400 rounded-md p-2 appearance-none text-stone-400" oninput="autoResize(this)" placeholder="Type your thoughts here..."></textarea>
           <button id="post" type="submit" name="post" class="font-archivo font-medium bg-yellow-300 rounded-md border-2 border-yellow-400 text-zinc-800 px-3 py-1 w-48">Post a Thought</button>
         </form>
       <?php endif; ?>

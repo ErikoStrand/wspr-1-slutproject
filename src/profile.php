@@ -36,6 +36,7 @@ if (doesUserExist($profileUsername, $conn)) {
     $logged = false;
   }
   $profileUserID = mysqli_fetch_row($conn->query("SELECT userID FROM users WHERE username = '$profileUsername'"))[0];
+  $userPosts =  getUserPosts($profileUserID, $conn);
   $_SESSION["profileUserID"] = $profileUserID;
   $profileNoofFollowers = $conn->query("SELECT followID FROM follow WHERE followID = '$profileUserID'")->num_rows;
   $profileNoofFollowing = $conn->query("SELECT userID FROM follow WHERE userID = '$profileUserID'")->num_rows;
@@ -74,6 +75,21 @@ if (isset($_POST["follow"])) {
 if (isset($_POST["unfollow"])) {
   unFollowPerson($profileUserID, $conn);
 }
+
+if (isset($_POST["post"])) {
+  $text = filter_input(INPUT_POST, "text", FILTER_SANITIZE_SPECIAL_CHARS);
+  postSomething($loggedUserID, $conn, $text, $loggedUsername);
+}
+function getUserPosts($userID, $conn) {
+  $sql = "SELECT `text`, postTime FROM posts WHERE userID = $userID";
+  $result = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+  return $result;
+}
+function postSomething($userID, $conn, $text, $loggedUsername) {
+  $conn->query("INSERT INTO posts (userID, `text`, username) VALUES ('$userID', '$text', '$loggedUsername')");
+  header("Refresh: 0");
+}
+
 function unFollowPerson($profileUserID, $conn) {
   $userID = $_SESSION["userID"];
   $conn->query("DELETE FROM follow WHERE userID = '$userID' AND followID = '$profileUserID'");
@@ -129,8 +145,25 @@ function followPerson($profileUserID, $conn) {
           <form action="" method="get"><button onclick="openModal('emptyDialog')" value=true class="flex flex-col items-center" name="followers"><span class="text-2xl font-mono font-bold"><?php echo $profileNoofFollowers?></span><span class="text-xs font-archivo">FOLLOWERS</span></button></form>
         </div>
       </div>
+    <!-- user posts -->
+    <div class="p">
+      <?php if ($profileUsername == $loggedUsername):?>
+        <form action="" method="post" class="flex flex-col gap-4">
+          <textarea id="text" name="text" class="resize-none overflow-hidden bg-transparent border-4 border-stone-200  placeholder:text-stone-400 rounded-md p-2 appearance-none text-stone-400" oninput="autoResize(this)" placeholder="Type your thoughts here..."></textarea>
+          <button id="post" type="submit" name="post" class="font-archivo font-medium bg-yellow-300 rounded-md border-2 border-yellow-400 text-zinc-800 px-3 py-1 w-48">Post a Thought</button>
+        </form>
+      <?php endif; ?>
+
+      <div id="posts" class="divide-y mt-6 divide-zinc-700 flex flex-col gap-2">
+        <div id="menuforposts">
+          <h2 class="font-archivo text-2xl font-semibold">Posts</h2>
+        </div>
+        <?php foreach($userPosts as $post):?>
+          <div class="p-2"><?php echo $post["text"];?></div>
+        <?php endforeach; ?>
+      </div>
     </div>
-  </div
+  </div>
 
 <?php else: ?>
   <div class="text-stone-200 text-2xl text-center">

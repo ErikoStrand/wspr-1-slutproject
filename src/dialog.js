@@ -50,3 +50,8 @@ function removeQueryParamAndReload(param) {
     location.reload();
   }
 }
+
+function autoResize(textarea) {
+  textarea.style.height = "auto"; // Reset the height
+  textarea.style.height = textarea.scrollHeight + "px"; // Set the height to scroll height
+}

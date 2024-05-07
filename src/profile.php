@@ -4,6 +4,24 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include "config/database.php";
 
+function logout () {
+// Swipe via memory
+if (ini_get("session.use_cookies")) {
+    // Prepare and swipe cookies
+    $params = session_get_cookie_params();
+    // clear cookies and sessions
+    setcookie(session_name(), '', time() - 1000000000,
+        $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]
+    );
+}
+// Just in case.. swipe these values too
+ini_set('session.gc_max_lifetime', 0);
+ini_set('session.gc_probability', 1);
+ini_set('session.gc_divisor', 1);
+// Completely destroy our server sessions..
+session_destroy();
+}
 
 $loggedUsername = ""; 
 
@@ -45,6 +63,10 @@ function doesUserExist($username, $conn) {
   } else {
     return false;
   }
+}
+if (isset($_POST["logout"])) {
+  logout();
+  header("Refresh: 0");
 }
 if (isset($_POST["follow"])) {
   followPerson($profileUserID, $conn);
@@ -98,7 +120,7 @@ function followPerson($profileUserID, $conn) {
         <?php elseif($profileUsername != $loggedUsername && $isLoggedFollowing): ?>
           <form action="" method="post"><button id="unfollow" type="submit" name="unfollow" class="font-archivo font-medium bg-red-500 rounded-xl border-2 border-red-400 px-3 py-1">Unfollow</button></form>
         <?php elseif($profileUsername == $loggedUsername):?>
-          
+          <form action="" method="post"><button id="logout" type="submit" name="logout" class="font-archivo font-medium bg-red-500 rounded-xl border-2 border-red-400 px-3 py-1">Log Out</button></form>
         <?php endif; ?>
         
       </div>

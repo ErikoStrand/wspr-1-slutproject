@@ -12,6 +12,7 @@ $profileUsername = filter_input(INPUT_GET, "user", FILTER_SANITIZE_SPECIAL_CHARS
 if (doesUserExist($profileUsername, $conn)) {
   if (isset($_SESSION["username"])) {
     $loggedUsername = $_SESSION["username"];
+    $loggedUserID = $_SESSION["userID"];
     $logged = true;
   } else {
     $logged = false;
@@ -21,6 +22,17 @@ if (doesUserExist($profileUsername, $conn)) {
   $profileNoofFollowers = $conn->query("SELECT followID FROM follow WHERE followID = '$profileUserID'")->num_rows;
   $profileNoofFollowing = $conn->query("SELECT userID FROM follow WHERE userID = '$profileUserID'")->num_rows;
   $isLoggedFollowing = $conn->query("SELECT userID FROM follow WHERE followID = '$profileUserID'")->num_rows;
+}
+function hasUserUploadedData($userID, $conn) {
+  $sql = "SELECT userID FROM generaldata WHERE userID = $userID UNION
+          SELECT userID FROM moviedata WHERE userID = $userID UNION
+          SELECT userID FROM showdata WHERE userID = $userID";
+  $result = $conn->query($sql)->num_rows;
+  if ($result > 0) {
+    return true;
+  } else {
+    return false;
+  }
 }
 function doesUserExist($username, $conn) {
   $sql = 'SELECT username FROM users WHERE username = ?';
@@ -73,7 +85,6 @@ function followPerson($profileUserID, $conn) {
 <body class="m-0 h-dvh w-full bg-zinc-900 p-0">
 <?php include("include/nav.php") ?>
 <?php include("include/dialog.php") ?>
-
 <?php if (doesUserExist($profileUsername, $conn)): ?>
   <div class="max-w-screen-xl text-stone-200 px-4 mx-auto">
     <div class="flex flex-row justify-between items-center h-24">
@@ -81,22 +92,13 @@ function followPerson($profileUserID, $conn) {
         <i class="fa-solid fa-user fa-2xl"></i>
         <h1 class="text-2xl font-archivo font-semibold"><?php echo $profileUsername?></h1>
         <?php if(!$logged):?>
-        <button onclick="openModal('signIn');" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button>
+          <button onclick="openModal('signIn');" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button>
         <?php elseif($profileUsername != $loggedUsername && !$isLoggedFollowing): ?>
-        <form action="" method="post"><button id="follow" type="submit" name="follow" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button></form>
+          <form action="" method="post"><button id="follow" type="submit" name="follow" class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1">Follow</button></form>
         <?php elseif($profileUsername != $loggedUsername && $isLoggedFollowing): ?>
-        <form action="" method="post"><button id="unfollow" type="submit" name="unfollow" class="font-archivo font-medium bg-red-500 rounded-xl border-2 border-red-400 px-3 py-1">Unfollow</button></form>
+          <form action="" method="post"><button id="unfollow" type="submit" name="unfollow" class="font-archivo font-medium bg-red-500 rounded-xl border-2 border-red-400 px-3 py-1">Unfollow</button></form>
         <?php elseif($profileUsername == $loggedUsername):?>
-        <div>
-          <button
-              class="font-archivo font-medium bg-blue-500 rounded-xl border-2 border-blue-400 px-3 py-1"
-              onclick="document.getElementById('file').click()"
-            >
-              Upload Your Ratings
-          </button>
-            <input type="file" id="file" style="display: none" />
-            <script src="input.js"></script>
-        </div>
+          
         <?php endif; ?>
         
       </div>

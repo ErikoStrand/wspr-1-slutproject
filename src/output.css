@@ -736,6 +736,14 @@ video {
   justify-content: space-between;
 }
 
+.justify-around{
+  justify-content: space-around;
+}
+
+.gap-1{
+  gap: 0.25rem;
+}
+
 .gap-2{
   gap: 0.5rem;
 }
@@ -746,10 +754,6 @@ video {
 
 .gap-4{
   gap: 1rem;
-}
-
-.gap-1{
-  gap: 0.25rem;
 }
 
 .divide-y > :not([hidden]) ~ :not([hidden]){
@@ -769,10 +773,6 @@ video {
 
 .self-center{
   align-self: center;
-}
-
-.self-baseline{
-  align-self: baseline;
 }
 
 .overflow-hidden{
@@ -873,6 +873,10 @@ video {
 .bg-zinc-900{
   --tw-bg-opacity: 1;
   background-color: rgb(24 24 27 / var(--tw-bg-opacity));
+}
+
+.fill-stone-200{
+  fill: #e7e5e4;
 }
 
 .p-0{
@@ -1065,11 +1069,6 @@ video {
   color: rgb(231 229 228 / var(--tw-text-opacity));
 }
 
-.text-stone-400{
-  --tw-text-opacity: 1;
-  color: rgb(168 162 158 / var(--tw-text-opacity));
-}
-
 .text-stone-50{
   --tw-text-opacity: 1;
   color: rgb(250 250 249 / var(--tw-text-opacity));
@@ -1080,24 +1079,14 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.text-zinc-800{
-  --tw-text-opacity: 1;
-  color: rgb(39 39 42 / var(--tw-text-opacity));
-}
-
-.text-zinc-700{
-  --tw-text-opacity: 1;
-  color: rgb(63 63 70 / var(--tw-text-opacity));
-}
-
-.text-zinc-500{
-  --tw-text-opacity: 1;
-  color: rgb(113 113 122 / var(--tw-text-opacity));
-}
-
 .text-zinc-400{
   --tw-text-opacity: 1;
   color: rgb(161 161 170 / var(--tw-text-opacity));
+}
+
+.text-zinc-800{
+  --tw-text-opacity: 1;
+  color: rgb(39 39 42 / var(--tw-text-opacity));
 }
 
 .underline{
@@ -1140,16 +1129,6 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.placeholder\:text-stone-400::-moz-placeholder{
-  --tw-text-opacity: 1;
-  color: rgb(168 162 158 / var(--tw-text-opacity));
-}
-
-.placeholder\:text-stone-400::placeholder{
-  --tw-text-opacity: 1;
-  color: rgb(168 162 158 / var(--tw-text-opacity));
-}
-
 .placeholder\:text-zinc-400::-moz-placeholder{
   --tw-text-opacity: 1;
   color: rgb(161 161 170 / var(--tw-text-opacity));
@@ -1186,10 +1165,6 @@ video {
 
 .hover\:underline:hover{
   text-decoration-line: underline;
-}
-
-.focus\:border-2:focus{
-  border-width: 2px;
 }
 
 .focus\:border-blue-600:focus{

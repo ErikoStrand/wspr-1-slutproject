@@ -601,10 +601,6 @@ video {
   margin-top: 1.5rem;
 }
 
-.mt-auto{
-  margin-top: auto;
-}
-
 .block{
   display: block;
 }
@@ -680,22 +676,6 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-@keyframes bounce{
-  0%, 100%{
-    transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8,0,1,1);
-  }
-
-  50%{
-    transform: none;
-    animation-timing-function: cubic-bezier(0,0,0.2,1);
-  }
-}
-
-.animate-bounce{
-  animation: bounce 1s infinite;
-}
-
 @keyframes fadeIn{
   from{
     opacity: 0;
@@ -732,10 +712,6 @@ video {
   align-items: center;
 }
 
-.justify-end{
-  justify-content: flex-end;
-}
-
 .justify-center{
   justify-content: center;
 }
@@ -744,20 +720,12 @@ video {
   justify-content: space-between;
 }
 
-.justify-around{
-  justify-content: space-around;
-}
-
 .gap-1{
   gap: 0.25rem;
 }
 
 .gap-2{
   gap: 0.5rem;
-}
-
-.gap-3{
-  gap: 0.75rem;
 }
 
 .gap-4{
@@ -781,10 +749,6 @@ video {
 
 .self-center{
   align-self: center;
-}
-
-.self-baseline{
-  align-self: baseline;
 }
 
 .overflow-hidden{
@@ -887,16 +851,12 @@ video {
   background-color: rgb(24 24 27 / var(--tw-bg-opacity));
 }
 
-.fill-stone-200{
-  fill: #e7e5e4;
-}
-
-.fill-red-400{
-  fill: #f87171;
-}
-
 .fill-red-500{
   fill: #ef4444;
+}
+
+.fill-stone-200{
+  fill: #e7e5e4;
 }
 
 .p-0{
@@ -964,24 +924,8 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.pl-6{
-  padding-left: 1.5rem;
-}
-
-.pr-6{
-  padding-right: 1.5rem;
-}
-
 .text-center{
   text-align: center;
-}
-
-.align-middle{
-  vertical-align: middle;
-}
-
-.align-bottom{
-  vertical-align: bottom;
 }
 
 .font-archivo{
@@ -1117,6 +1061,11 @@ video {
   color: rgb(39 39 42 / var(--tw-text-opacity));
 }
 
+.text-zinc-300{
+  --tw-text-opacity: 1;
+  color: rgb(212 212 216 / var(--tw-text-opacity));
+}
+
 .underline{
   text-decoration-line: underline;
 }
@@ -1135,10 +1084,6 @@ video {
 .shadow-zinc-600{
   --tw-shadow-color: #52525b;
   --tw-shadow: var(--tw-shadow-colored);
-}
-
-.duration-100{
-  transition-duration: 100ms;
 }
 
 .duration-200{
@@ -1184,11 +1129,6 @@ video {
 
 .hover\:bg-gray-600\/50:hover{
   background-color: rgb(75 85 99 / 0.5);
-}
-
-.hover\:text-stone-400:hover{
-  --tw-text-opacity: 1;
-  color: rgb(168 162 158 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover{
@@ -1271,10 +1211,6 @@ video {
 @media (min-width: 640px){
   .sm\:w-auto{
     width: auto;
-  }
-
-  .sm\:pb-0{
-    padding-bottom: 0px;
   }
 }
 

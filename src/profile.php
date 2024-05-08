@@ -108,6 +108,9 @@ function likePost($postID, $conn) {
   $conn->query("INSERT INTO postlikes (userID, postID) VALUES ('$userID', '$postID')");
   header("Refresh: 0");
 }
+function getNoofPosts($userID, $conn) {
+  return $conn->query("SELECT postID FROM posts WHERE userID = '$userID'")->num_rows;
+}
 function getUserPosts($userID, $conn) {
   $sql = "SELECT `text`, postTime, username, postID FROM posts WHERE userID = $userID ORDER BY postID DESC";
   $result = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
@@ -197,8 +200,10 @@ function followPerson($profileUserID, $conn) {
       <?php endif; ?>
 
       <div id="postsContainer" class="mt-6 flex flex-col gap-2 divide-y divide-zinc-700">
-        <div id="menuforposts">
-          <h2 class="font-archivo text-2xl font-semibold px-2">Posts</h2>
+        <div id="menuforposts" class="flex flex-row items-center gap-2">
+          <h2 class="font-archivo text-2xl font-semibold">Posts</h2>
+          <span>-</span>
+          <h3 class="font-mono font-bold text-xl self-end text-zinc-400"><?php echo getNoofPosts($profileUserID, $conn);?></h3>
         </div>
 
         <div id="thePosts" class="divide-y flex flex-col divide-zinc-700 gap-1">

@@ -891,6 +891,14 @@ video {
   fill: #e7e5e4;
 }
 
+.fill-red-400{
+  fill: #f87171;
+}
+
+.fill-red-500{
+  fill: #ef4444;
+}
+
 .p-0{
   padding: 0px;
 }

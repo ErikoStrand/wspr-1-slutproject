@@ -601,6 +601,10 @@ video {
   margin-top: 1.5rem;
 }
 
+.mt-auto{
+  margin-top: auto;
+}
+
 .block{
   display: block;
 }
@@ -777,6 +781,10 @@ video {
 
 .self-center{
   align-self: center;
+}
+
+.self-baseline{
+  align-self: baseline;
 }
 
 .overflow-hidden{
@@ -958,6 +966,14 @@ video {
 
 .text-center{
   text-align: center;
+}
+
+.align-middle{
+  vertical-align: middle;
+}
+
+.align-bottom{
+  vertical-align: bottom;
 }
 
 .font-archivo{

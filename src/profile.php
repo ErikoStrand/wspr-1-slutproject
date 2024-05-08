@@ -81,7 +81,7 @@ if (isset($_POST["post"])) {
   postSomething($loggedUserID, $conn, $text, $loggedUsername);
 }
 function getUserPosts($userID, $conn) {
-  $sql = "SELECT `text`, postTime FROM posts WHERE userID = $userID";
+  $sql = "SELECT `text`, postTime, username FROM posts WHERE userID = $userID ORDER BY postID DESC";
   $result = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
   return $result;
 }
@@ -94,6 +94,20 @@ function unFollowPerson($profileUserID, $conn) {
   $userID = $_SESSION["userID"];
   $conn->query("DELETE FROM follow WHERE userID = '$userID' AND followID = '$profileUserID'");
   header("Refresh: 0");
+}
+function getRelativeTime($timestamp) {
+  $howLong = time() - $timestamp;
+  if ($howLong < 60) {
+    return $howLong . "s";
+  } elseif ($howLong < 3600) {
+    return floor($howLong / 60) . "m";
+  } elseif ($howLong < 86400) {
+    return floor($howLong / 3600) . "h";
+  } elseif ($howLong < 86400 * 7) {
+    return floor($howLong / 86400) . "d";
+  } else {
+    return date("F j", $timestamp);
+  }
 }
 function followPerson($profileUserID, $conn) {
   $userID = $_SESSION["userID"];
@@ -149,18 +163,28 @@ function followPerson($profileUserID, $conn) {
     <div class="p">
       <?php if ($profileUsername == $loggedUsername):?>
         <form action="" method="post" class="flex flex-col gap-4">
-          <textarea id="text" name="text" class="resize-none overflow-hidden bg-transparent border-[1px] border-zinc-700  placeholder:text-stone-400 rounded-md p-2 appearance-none text-stone-400" oninput="autoResize(this)" placeholder="Type your thoughts here..."></textarea>
-          <button id="post" type="submit" name="post" class="font-archivo font-medium bg-yellow-300 rounded-md border-2 border-yellow-400 text-zinc-800 px-3 py-1 w-48">Post a Thought</button>
+          <textarea id="text" name="text" class="resize-none overflow-hidden bg-transparent border-[1px] border-zinc-700 placeholder:text-zinc-400 rounded-md p-2 appearance-none text-zinc-400" oninput="autoResize(this)" placeholder="Type your thoughts here..."></textarea>
+          <button id="post" type="submit" name="post" class="font-archivo font-medium self-end bg-yellow-300 rounded-md border-2 border-yellow-400 text-zinc-800 px-3 py-1 w-48">Post a Thought</button>
         </form>
       <?php endif; ?>
 
-      <div id="posts" class="divide-y mt-6 divide-zinc-700 flex flex-col gap-2">
+      <div id="postsContainer" class="mt-6 flex flex-col gap-2 divide-y divide-zinc-700">
         <div id="menuforposts">
-          <h2 class="font-archivo text-2xl font-semibold">Posts</h2>
+          <h2 class="font-archivo text-2xl font-semibold px-2">Posts</h2>
         </div>
-        <?php foreach($userPosts as $post):?>
-          <div class="p-2"><?php echo $post["text"];?></div>
-        <?php endforeach; ?>
+
+        <div id="thePosts" class="divide-y flex flex-col divide-zinc-700 gap-1">
+          <?php foreach($userPosts as $post):?>
+            <div id="postContainer" class="p-2 font-archivo">
+              <div class="flex flex-row gap-1">
+                <a class="font-bold hover:underline" href="<?php echo $post["username"]?>"><?php echo $post["username"];?></a>
+                <span class="text-xs self-center">-</span>
+                <div class="text-zinc-400 font-light self-end"><?php echo getRelativeTime($post["postTime"]);?></div>
+              </div>
+              <div class="font-light"><?php echo $post["text"];?></div>
+            </div>
+          <?php endforeach; ?>
+        </div>
       </div>
     </div>
   </div>

@@ -79,6 +79,12 @@ if (isset($_POST["post"])) {
   $text = filter_input(INPUT_POST, "text", FILTER_SANITIZE_SPECIAL_CHARS);
   postSomething($loggedUserID, $conn, $text, $loggedUsername);
 }
+// får bara göras om man är inne i singular post.
+if (isset($_POST["commentPost"])) {
+  $text = filter_input(INPUT_POST, "commentText", FILTER_SANITIZE_SPECIAL_CHARS);
+  postSomething($loggedUserID, $conn, $text, $loggedUsername, $postID);
+}
+
 if (isset($_POST["likePost"])) {
   likePost($_POST["postID"], $conn);
 }
@@ -116,12 +122,12 @@ function getUserPost($postID, $conn) {
   return $result;
 }
 function getUserPosts($userID, $conn) {
-  $sql = "SELECT `text`, postTime, username, postID FROM posts WHERE userID = $userID ORDER BY postID DESC";
+  $sql = "SELECT `text`, postTime, username, postID FROM posts WHERE userID = $userID AND parentID = 0 ORDER BY postID DESC";
   $result = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
   return $result;
 }
-function postSomething($userID, $conn, $text, $loggedUsername) {
-  $conn->query("INSERT INTO posts (userID, `text`, username) VALUES ('$userID', '$text', '$loggedUsername')");
+function postSomething($userID, $conn, $text, $loggedUsername, $parentID = NULL) {
+  $conn->query("INSERT INTO posts (userID, `text`, username, parentID) VALUES ('$userID', '$text', '$loggedUsername', '$parentID')");
   header("Refresh: 0");
 }
 
@@ -130,6 +136,12 @@ function unFollowPerson($profileUserID, $conn) {
   $conn->query("DELETE FROM follow WHERE userID = '$userID' AND followID = '$profileUserID'");
   header("Refresh: 0");
 }
+function getPostComments($parentID, $conn) {
+  $sql = "SELECT `text`, postTime, username, postID FROM posts WHERE parentID = $parentID ORDER BY postID DESC";
+  $result = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
+  return $result;
+}
+
 function getRelativeTime($timestamp) {
   $howLong = time() - $timestamp;
   if ($howLong < 60) {
@@ -213,7 +225,7 @@ function followPerson($profileUserID, $conn) {
       <?php $singlePost = getUserPost($postID, $conn);?>
       <div id="mainsingularcontent" class="flex flex-col gap-2 font-archivo border-b-2 border-zinc-800">
         <nav class="flex flex-row gap-4 font-archivo font-bold text-2xl items-center relative -left-2 mb-4">
-          <a href="/src/<?php echo $singlePost["username"]?>" class="rounded-full hover:bg-zinc-800 duration-200 ease-in-out p-2">
+          <a href="javascript:history.back()" class="rounded-full hover:bg-zinc-800 duration-200 ease-in-out p-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="28px" height="28px" class="fill-stone-200"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
           </a>
           <h1>Thought</h1>
@@ -244,13 +256,20 @@ function followPerson($profileUserID, $conn) {
           <div class="py-2">
             <h2 class="">Replying to <span class="text-blue-400"><?php echo "@". $singlePost["username"];?></span></h2>
             <form action="" method="post" class="flex flex-col gap-2">
-              <textarea id="text" name="text" class="resize-none overflow-hidden h-6 bg-transparent placeholder:text-zinc-400 rounded-md outline-none text-zinc-400" oninput="autoResize(this)" placeholder="Type your reply here"></textarea>
-              <button id="post" type="submit" name="post" class="font-archivo font-medium self-end bg-blue-500 rounded-xl border-2 border-blue-400 text-stone-200 px-3 py-1 w-24">Reply</button>
+              <textarea id="text" name="commentText" class="resize-none overflow-hidden h-6 bg-transparent placeholder:text-zinc-400 rounded-md outline-none text-zinc-400" oninput="autoResize(this)" placeholder="Type your reply here"></textarea>
+              <button id="commentPost" type="submit" name="commentPost" class="font-archivo font-medium self-end bg-blue-500 rounded-full border-2 border-blue-400 text-stone-200 px-3 py-1 w-24">Reply</button>
             </form>
           </div>
         <?php endif; ?>
       </div>
-
+      <div id="postsContainer" class="mt-6 flex flex-col gap-2">
+      <?php $postComments = getPostComments($postID, $conn)?>
+        <div id="thePosts" class="flex flex-col">
+          <?php foreach($postComments as $postComment):?>
+            <?php include "include/childPost.php"?>
+          <?php endforeach; ?>
+        </div>
+      </div>
     <?php else: ?>
       <!--post or username and postid is incorrect-->
       <div class="text-stone-200 text-2xl text-center">

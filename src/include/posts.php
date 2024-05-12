@@ -1,5 +1,5 @@
 <!-- user posts -->
-      <div id="postsContainer" class="mt-6 flex flex-col gap-2 divide-y divide-zinc-700">
+      <div id="postsContainer" class="mt-6 flex flex-col gap-2">
         <div id="menuforposts" class="flex flex-row items-center gap-2">
           <h2 class="font-archivo text-2xl font-semibold">Posts</h2>
           <span>-</span>

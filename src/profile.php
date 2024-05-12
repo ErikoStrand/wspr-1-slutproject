@@ -263,7 +263,7 @@ function followPerson($profileUserID, $conn) {
         <?php endif; ?>
       </div>
       <div id="postsContainer" class="mt-6 flex flex-col gap-2">
-      <?php $postComments = getPostComments($postID, $conn)?>
+        <?php $postComments = getPostComments($postID, $conn)?>
         <div id="thePosts" class="flex flex-col">
           <?php foreach($postComments as $postComment):?>
             <?php include "include/childPost.php"?>

@@ -1,4 +1,4 @@
-<div id="postContainer" class="p-2 font-archivo hover:bg-zinc-800/50 border-b-[1px] border-zinc-800" onclick="navigateToPost('<?php echo $postComment['username'];?>', <?php echo $postComment['postID'];?>)">
+<div id="postContainer" class="font-archivo hover:bg-zinc-800/50 border-b-[1px] border-zinc-800" onclick="navigateToPost('<?php echo $postComment['username'];?>', <?php echo $postComment['postID'];?>)">
   <div class="flex flex-row gap-1">
     <a class="font-bold hover:underline" href="/src/<?php echo $postComment["username"]?>"><?php echo $postComment["username"];?></a>
     <span class="text-xs self-center">-</span>

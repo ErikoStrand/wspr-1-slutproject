@@ -260,7 +260,7 @@ function followPerson($profileUserID, $conn) {
           <div class="py-2">
             <h2 class="">Replying to <span class="text-blue-400"><?php echo "@". $singlePost["username"];?></span></h2>
             <form action="" method="post" class="flex flex-col gap-2">
-              <textarea id="text" name="commentText" class="resize-none overflow-hidden h-6 bg-transparent placeholder:text-zinc-400 rounded-md outline-none text-zinc-400" oninput="autoResize(this)" placeholder="Type your reply here"></textarea>
+              <textarea id="text" name="commentText" class="resize-none overflow-hidden h-6 bg-transparent placeholder:text-zinc-400 text-lg rounded-md outline-none text-zinc-400" oninput="autoResize(this)" placeholder="Type your reply here"></textarea>
               <button id="commentPost" type="submit" name="commentPost" class="font-archivo font-medium self-end bg-blue-500 rounded-full border-2 border-blue-400 text-stone-200 px-3 py-1 w-24">Reply</button>
             </form>
           </div>

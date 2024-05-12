@@ -55,3 +55,10 @@ function autoResize(textarea) {
   textarea.style.height = "auto"; // Reset the height
   textarea.style.height = textarea.scrollHeight + "px"; // Set the height to scroll height
 }
+
+function navigateToPost(username, postID) {
+  // Construct the URL
+  var url = username + "/thought/" + postID;
+  // Navigate to the URL
+  window.location.href = url;
+}

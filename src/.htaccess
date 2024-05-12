@@ -1,4 +1,8 @@
 RewriteEngine On
 
-RewriteRule ^([a-zA-Z0-9]+)$ profile.php?user=$1 [QSA,NC,L]
+## htacces works from top to bottom and is like a if else sats. so have the most advanced first, other wise the simple would always match and it wouldnt work.
+# Handle /src/[username]/thought/[postID]
+RewriteRule ^([a-zA-Z0-9]+)/thought/([0-9]+)$ profile.php?user=$1&thought=true&postID=$2 [QSA,NC,L]
 
+# Handle /src/[username]
+RewriteRule ^([a-zA-Z0-9]+)$ profile.php?user=$1&thought=false [QSA,NC,L]

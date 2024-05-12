@@ -95,6 +95,10 @@ function getPostLikes($postID, $conn) {
   $result = $conn->query("SELECT userID FROM postlikes WHERE postID = '$postID'")->num_rows;
   return $result;
 }
+function getNoofPostComments($postID, $conn) {
+  $result = $conn->query("SELECT userID FROM posts WHERE parentID = '$postID'")->num_rows;
+  return $result;
+}
 function hasUserLikedPost($postID, $userID, $conn) {
   $result = $conn->query("SELECT userID FROM postlikes WHERE postID = '$postID' AND userID = '$userID'")->num_rows;
   if ($result > 0) {

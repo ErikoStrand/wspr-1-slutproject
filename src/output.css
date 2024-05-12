@@ -785,6 +785,10 @@ video {
   border-radius: 0.75rem;
 }
 
+.rounded-full{
+  border-radius: 9999px;
+}
+
 .border-0{
   border-width: 0px;
 }
@@ -1156,6 +1160,11 @@ video {
 
 .hover\:bg-zinc-800\/50:hover{
   background-color: rgb(39 39 42 / 0.5);
+}
+
+.hover\:bg-zinc-800:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(39 39 42 / var(--tw-bg-opacity));
 }
 
 .hover\:underline:hover{

@@ -796,11 +796,6 @@ video {
   border-width: 1px;
 }
 
-.border-y-2{
-  border-top-width: 2px;
-  border-bottom-width: 2px;
-}
-
 .border-y-\[1px\]{
   border-top-width: 1px;
   border-bottom-width: 1px;

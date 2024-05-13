@@ -1,6 +1,6 @@
 <!-- user posts -->
       <div id="postsContainer" class="mt-6 flex flex-col gap-2">
-        <div id="menuforposts" class="flex flex-row items-center gap-2">
+        <div id="menuforposts" class="flex flex-row items-center gap-2 border-b-[1px] border-zinc-800">
           <h2 class="font-archivo text-2xl font-semibold">Posts</h2>
           <span>-</span>
           <h3 class="font-mono font-bold text-xl self-end text-zinc-400"><?php echo getNoofPosts($profileUserID, $conn);?></h3>
@@ -8,7 +8,7 @@
         <div id="thePosts" class="flex flex-col">
           <?php foreach($userPosts as $post):?>
             <!--href="<?php echo $post["username"];?>/thought/<?php echo $post["postID"];?>"-->
-            <div id="postContainer" class="p-2 font-archivo hover:bg-zinc-800/50 border-y-[1px] border-zinc-800" onclick="navigateToPost('<?php echo $post['username'];?>', <?php echo $post['postID'];?>)">
+            <div id="postContainer" class="p-2 font-archivo hover:bg-zinc-800/50 border-b-[1px] border-zinc-800" onclick="navigateToPost('<?php echo $post['username'];?>', <?php echo $post['postID'];?>)">
               <div class="flex flex-row gap-1">
                 <a class="font-bold hover:underline" href="/src/<?php echo $post["username"]?>"><?php echo $post["username"];?></a>
                 <span class="text-xs self-center">-</span>

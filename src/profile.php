@@ -88,6 +88,7 @@ if (isset($_POST["commentPost"])) {
 if (isset($_POST["likePost"])) {
   likePost($_POST["postID"], $conn);
 }
+
 if (isset($_POST["unlikePost"])) {
   unlikePost($_POST["postID"], $conn);
 }
@@ -217,7 +218,7 @@ function followPerson($profileUserID, $conn) {
         <!--handles post input.-->
         <?php if ($profileUsername == $loggedUsername):?>
           <form action="" method="post" class="flex flex-col gap-4">
-            <textarea id="text" name="text" class="resize-none overflow-hidden bg-transparent border-[1px] border-zinc-700 placeholder:text-zinc-400 rounded-md p-2 appearance-none text-zinc-400" oninput="autoResize(this)" placeholder="Type your thoughts here..."></textarea>
+            <textarea id="text" name="text" class="resize-none overflow-hidden bg-transparent border-[1px] border-zinc-800 placeholder:text-zinc-400 rounded-md p-2 appearance-none text-zinc-400" oninput="autoResize(this)" placeholder="Type your thoughts here..."></textarea>
             <button id="post" type="submit" name="post" class="font-archivo font-medium self-end bg-yellow-300 rounded-md border-2 border-yellow-400 text-zinc-800 px-3 py-1 w-48">Post a Thought</button>
           </form>
         <?php endif; ?>

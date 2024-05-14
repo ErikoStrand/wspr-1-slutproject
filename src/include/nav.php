@@ -11,7 +11,7 @@ include("include/login.php");
       <div>
         <a
           class="block px-4 font-heebo text-lg font-bold leading-10 text-stone-50"
-          href="/src"
+          href="/"
           >Bloob</a
         >
       </div>
@@ -21,7 +21,7 @@ include("include/login.php");
         <li
           class="rounded-md px-2 duration-200 ease-in-out hover:bg-gray-600/50"
         >
-          <a href="/src" class="block leading-10" title="Home">Home</a>
+          <a href="/" class="block leading-10" title="Home">Home</a>
         </li>
         <?php if (!isset($_SESSION["username"])):?>
         <li

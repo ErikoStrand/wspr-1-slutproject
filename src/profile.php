@@ -119,7 +119,7 @@ function likePost($postID, $conn) {
   header("Refresh: 0");
 }
 function getNoofPosts($userID, $conn) {
-  return $conn->query("SELECT postID FROM posts WHERE userID = '$userID'")->num_rows;
+  return $conn->query("SELECT postID FROM posts WHERE userID = '$userID' AND parentID = 0")->num_rows;
 }
 function getUserPost($postID, $conn) {
   $sql = "SELECT `text`, postTime, username, userID FROM posts WHERE postID = $postID";

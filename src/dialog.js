@@ -58,7 +58,7 @@ function autoResize(textarea) {
 
 function navigateToPost(username, postID) {
   // Construct the URL
-  var url = "/src/" + username + "/thought/" + postID;
+  var url = username + "/thought/" + postID;
   // Navigate to the URL
   window.location.href = url;
 }

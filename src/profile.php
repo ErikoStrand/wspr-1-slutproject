@@ -176,15 +176,15 @@ function followPerson($profileUserID, $conn) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/src/output.css" rel="stylesheet" />
+  <link href="/output.css" rel="stylesheet" />
   <script
       defer
       src="https://kit.fontawesome.com/0a145d8537.js"
       crossorigin="anonymous"
     ></script>
   <title>Document</title>
-  <script defer src="/src/dialog.js"></script>
-  <script defer src="/src/lib/scripts/keepscroll.js"></script>
+  <script defer src="/dialog.js"></script>
+  <script defer src="/lib/scripts/keepscroll.js"></script>
 </head>
 
 <body class="m-0 h-dvh w-full bg-zinc-900 p-0">
